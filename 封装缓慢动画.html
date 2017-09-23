@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    #box {
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+    position: absolute;
+    left: 0px;
+    top: 100px;
+    }
+    </style>
+</head>
+<body>
+<input type="button" value="移到1000" id="btn1"/>
+<input type="button" value="移到0" id="btn2"/>
+<div id="box"></div>
+<script>
+    var btn1=document.getElementById("btn1");
+    var btn2=document.getElementById("btn2");
+    var box=document.getElementById("box");
+    btn1.onclick=function(){
+        animate(box,1000);
+    };
+    btn2.onclick=function(){
+        animate(box,0)
+    }
+    function animate(element,target){
+        //每次计时时清除上一次的的计时器
+        clearInterval(element.timer);
+        element.timer=setInterval(function(){
+            //获取当前距离
+            var current=element.offsetLeft;
+            //想要让他缓慢动起来，就要让步长每次走一次就要减一次
+            var step=(target-current)/100;
+            //像素最少值为1，浏览器会自动四舍五入，要保证买次都加一，确保当前值等于目标值，那就要向右是，向上取整，向左时，向下取整
+            step=target>=current?Math.ceil(step):Math.floor(step);
+            current+=step;
+            element.style.left=current+"px";
+            if(current==target){
+                clearInterval(element.timer);
+                element.style.left=target+"px";
+            }
+
+        },20)
+    }
+</script>
+</body>
+</html>

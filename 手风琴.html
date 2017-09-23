@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        ul {
+            list-style: none;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        div {
+            width: 1150px;
+            height: 400px;
+            margin: 50px auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+
+        div li {
+            width: 240px;
+            height: 400px;
+            float: left;
+        }
+
+        div ul {
+            width: 1300px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script src="animate.js"></script>
+<script>
+    //获取元素
+    var lis=document.getElementsByTagName("li");
+    //遍历li,注册事件
+    for(var i=0;i<lis.length;i++){
+        //给每个li加个背景图片
+        lis[i].style.background="url(\"images/"+(i+1)+".jpg\")";
+        lis[i].onmouseover=overHandle;
+        lis[i].onmouseout=outHandle;
+    }
+    function overHandle(){
+        //其他盒子变为100
+        for(var j=0;j<lis.length;j++){
+           animate_4(lis[j],{width:100});
+        }
+        animate_4(this,{width:800})
+    }
+    function outHandle(){
+//        移出所有都变为200
+        for(var j=0;j<lis.length;j++){
+            animate_4(lis[j],{width:240});
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+     function getStyle(element,attr){
+         if(window.getComputedStyle){
+             return window.getComputedStyle(element,null)[attr];
+         }else{
+             return element.currentStyle[attr];
+         }
+     }
+
+</script>
+</body>
+</html>

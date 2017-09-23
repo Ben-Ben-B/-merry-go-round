@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/css.css"/>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="slide" id="slide">
+        <ul>
+            <li>
+                <a href="#"><img src="images/slidepic1.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic2.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic3.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic4.jpg" alt="" /></a>
+            </li>
+            <li>
+                <a href="#"><img src="images/slidepic5.jpg" alt="" /></a>
+            </li>
+        </ul>
+        <div class="arrow" id="arrow">
+            <a href="javascript:;" class="prev" id="arrLeft"></a>
+            <a href="javascript:;" class="next" id="arrRight"></a>
+        </div>
+    </div>
+</div>
+<script src="animate.js"></script>
+<script>
+    /**
+     * 1  先散开
+     * 2  鼠标移入，箭头显示，鼠标移除，箭头消失
+     * 3  左右按钮让图片进行切换
+     */
+
+    var config = [{
+        width: 400,
+        top: 20,
+        left: 50,
+        opacity: 0.2,
+        zIndex: 2
+    }, //0
+        {
+            width: 600,
+            top: 70,
+            left: 0,
+            opacity: 0.8,
+            zIndex: 3
+        }, //1
+        {
+            width: 800,
+            top: 100,
+            left: 200,
+            opacity: 1,
+            zIndex: 4
+        }, //2
+        {
+            width: 600,
+            top: 70,
+            left: 600,
+            opacity: 0.8,
+            zIndex: 3
+        }, //3
+        {
+            width: 400,
+            top: 20,
+            left: 750,
+            opacity: 0.2,
+            zIndex: 2
+        } //4
+    ];
+    //获取元素
+    var wrap=document.getElementById("wrap");
+    var lis=wrap.children[0].children[0].children;
+    var arrow=document.getElementById("arrow");
+    var leftBtn=arrow.children[0];
+    var rightBtn=arrow.children[1];
+    var arr=[];
+    for(var j=0;j<lis.length;j++){
+        arr.push(lis[j]);
+    }
+    //让图片散开
+    rotate()//为了一开始就散开
+ function rotate(){
+     for(var i=0;i<arr.length;i++){
+         animate_4(arr[i],config[i]);
+     }
+ }
+//    鼠标移入，箭头显示，鼠标移除，箭头消失
+    wrap.onmouseover=function(){
+        animate_4(arrow,{opacity:1});
+    }
+    wrap.onmouseout=function(){
+        animate_4(arrow,{opacity:0});
+    }
+    //左右按钮让图片进行切换
+    rightBtn.onclick=function(){
+        //把最后一张抽出来，放到最前面
+          arr.unshift(arr.pop());
+        rotate();
+    }
+    leftBtn.onclick=function(){
+        //把第一张抽出来，放到最后面
+        arr.push(arr.shift());
+        rotate()
+    }
+</script>
+</body>
+</html>
